@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wonderful Travels</title>
     <link rel="stylesheet" href="style/styles.css">
+    <script type="module" src="scripts/main.js" defer></script>
 </head>
 <header>
     <nav>
@@ -22,7 +23,7 @@
     <h1 class="titulo">Wonderful Travels</h1>
 
     <!-- Formulario para agregar un viaje -->
-    <form action="travel.model.php" method="post">
+    <form action="./controlador/ajax-handler.php" method="post" id="insertTravel">
         <div class="form-group">
             <label for="nom">Nombre</label>
             <input type="text" id="nom" name="nom" required>
@@ -58,12 +59,12 @@
 
         <div class="form-group">
             <label for="preu">Precio</label>
-            <input type="text" id="preu" name="preu" readonly disabled>
+            <input type="text" id="preu" name="preu" readonly>
         </div>
 
         <div class="form-group">
             <label for="num-persones">Número de personas</label>
-            <input type="number" name="num-persones" id="num-persones" min="1">
+            <input type="number" name="num-persones" id="num-persones" min="1" required>
         </div>
 
         <div class="form-group full-width">
@@ -72,10 +73,10 @@
         </div>
 
         <!-- Botón Afegueix para agregar el viaje -->
-        <button type="submit" name="action" value="addTravel">Afegueix</button>
+        <button type="submit" name="action" value="ajaxInsertTravel">Afegueix</button>
     </form>
 
-    <script type="module" src="scripts/main.js"></script>
+    <div id="viajes-lista" class="viajes-container"></div>
 </body>
 
 </html>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 21-11-2024 a las 19:08:17
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Servidor: proxysql-01.dd.scip.local
+-- Tiempo de generación: 24-11-2024 a las 20:46:03
+-- Versión del servidor: 10.10.2-MariaDB-1:10.10.2+maria~deb11
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `wonderful_travel`
+-- Base de datos: `ddb238704`
 --
 
 -- --------------------------------------------------------
@@ -27,11 +27,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `continents`
 --
 
-CREATE TABLE IF NOT EXISTS `continents` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_continent` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `continents` (
+  `id` int(11) NOT NULL,
+  `nom_continent` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `continents`
@@ -52,14 +51,36 @@ INSERT INTO `continents` (`id`, `nom_continent`) VALUES
 -- Estructura de tabla para la tabla `paisos`
 --
 
-CREATE TABLE IF NOT EXISTS `paisos` (
+CREATE TABLE `paisos` (
   `id` int(11) NOT NULL,
   `nom_pais` varchar(100) DEFAULT NULL,
   `preu` int(6) NOT NULL,
-  `continent_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_IdContinent` (`continent_id`)
+  `continent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `paisos`
+--
+
+INSERT INTO `paisos` (`id`, `nom_pais`, `preu`, `continent_id`) VALUES
+(1, 'Nigeria', 1000, 1),
+(2, 'Sudáfrica', 1100, 1),
+(3, 'Egipto', 1200, 1),
+(4, 'Estados Unidos', 2000, 2),
+(5, 'Canadá', 2100, 2),
+(6, 'México', 2200, 2),
+(7, 'Brasil', 1500, 3),
+(8, 'Argentina', 1600, 3),
+(9, 'Chile', 1700, 3),
+(10, 'Australia', 1800, 7),
+(11, 'Nueva Zelanda', 1900, 7),
+(12, 'Fiyi', 2000, 7),
+(13, 'China', 1700, 5),
+(14, 'Japón', 1800, 5),
+(15, 'India', 1900, 5),
+(16, 'Francia', 1600, 6),
+(17, 'Alemania', 1700, 6),
+(18, 'Italia', 1800, 6);
 
 -- --------------------------------------------------------
 
@@ -67,17 +88,55 @@ CREATE TABLE IF NOT EXISTS `paisos` (
 -- Estructura de tabla para la tabla `viatges`
 --
 
-CREATE TABLE IF NOT EXISTS `viatges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `viatges` (
+  `id` int(11) NOT NULL,
   `nom` varchar(60) NOT NULL,
   `telefon` int(14) NOT NULL,
   `num_persones` int(2) NOT NULL,
   `data` date NOT NULL,
   `preu` int(11) NOT NULL,
-  `pais_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_PaisID` (`pais_id`) USING BTREE
+  `pais_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `continents`
+--
+ALTER TABLE `continents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `paisos`
+--
+ALTER TABLE `paisos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_IdContinent` (`continent_id`);
+
+--
+-- Indices de la tabla `viatges`
+--
+ALTER TABLE `viatges`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_PaisID` (`pais_id`) USING BTREE;
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `continents`
+--
+ALTER TABLE `continents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `viatges`
+--
+ALTER TABLE `viatges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
