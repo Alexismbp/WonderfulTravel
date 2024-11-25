@@ -1,33 +1,42 @@
 import { imagenesPaises } from './imagenes-paises.js';
 
 // Funció per obtenir els continents
-export function getContinents() {
-    // Cargar continentes des del servidor
-    fetch('controlador/ajax-handler.php?action=ajaxContinents')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la resposta del servidor');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error('Error del servidor:', data.error);
-                return;
-            }
-            // Afegir opcions de continents al select
-            const continentSelect = document.querySelector('select[name="continent"]');
-            data.forEach(continent => {
-                const option = document.createElement('option');
-                option.value = continent.id;
-                option.textContent = continent.nom_continent;
-                continentSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al carregar els continents. Per favor, recarrega la pàgina.');
-        });
+export function getContinents(retryCount = 3) {
+    return new Promise((resolve, reject) => {
+        const attemptFetch = (attempts) => {
+            fetch('controlador/ajax-handler.php?action=ajaxContinents')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la resposta del servidor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    // Afegir opcions de continents al select
+                    const continentSelect = document.querySelector('select[name="continent"]');
+                    data.forEach(continent => {
+                        const option = document.createElement('option');
+                        option.value = continent.id;
+                        option.textContent = continent.nom_continent;
+                        continentSelect.appendChild(option);
+                    });
+                    resolve(true);
+                })
+                .catch(error => {
+                    console.error(`Intent ${attempts}: Error al carregar continents:`, error);
+                    if (attempts > 1) {
+                        setTimeout(() => attemptFetch(attempts - 1), 1000);
+                    } else {
+                        reject(error);
+                    }
+                });
+        };
+        
+        attemptFetch(retryCount);
+    });
 }
 
 // Cargar països al seleccionar un continent

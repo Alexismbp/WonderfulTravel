@@ -18,21 +18,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Inicialització del rellotge analògic
         initAnalogClock();
         
-        // Obtenim els continents de la base de dades
-        await getContinents();
+        // Inicialitzar les dues peticions en paral·lel
+        await Promise.all([
+            getContinents().catch(error => {
+                console.error('Error al carregar continents:', error);
+                alert('Error al carregar els continents. Es tornará a intentar...');
+                return getContinents(2); // Segon intent si falla
+            }),
+            loadTravels().catch(error => {
+                console.error('Error al carregar viatges:', error);
+                alert('Error al carregar els viatges. Es tornará a intentar...');
+                return loadTravels(2); // Segon intent si falla
+            })
+        ]);
         
-        // Pausa per assegurar que la connexió anterior es tanqui correctament
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        // Inicialització del formulari amb les dades necessàries
+        // Inicialització del formulari
         await initializeForm();
         
-        // Pausa addicional per evitar conflictes entre connexions
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        // Càrrega dels viatges disponibles
-        await loadTravels();
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error crític:', error);
+        alert('Hi ha hagut un error crític. Si us plau, recarrega la pàgina.');
     }
 });
