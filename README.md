@@ -71,7 +71,9 @@ WonderfulTravel es una aplicación web diseñada para gestionar y visualizar via
 ## To Do
 - Optimización de imágenes (pasar a WebP)
 - Echar un vistazo a Google PageSpeed Insights
-- Revisar la inicialización del formulario tras el envío de datos.
+- Ampliar la BDD amb taules com ara Ofertes, Històrics, ... (+2 punt)
+- Poder imprimir les reserves en un format diferent a la que surt a la web (+1 punt)
+- Refactor
 
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
