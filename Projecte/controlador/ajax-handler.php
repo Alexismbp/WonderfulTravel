@@ -1,23 +1,23 @@
 <?php
 header('Content-Type: application/json');
-error_reporting(E_ALL);
-ini_set('display_errors', 0); // Desactivamos la salida de errores PHP directa
 
 require_once __DIR__ . '/../model/database.php';
 require_once __DIR__ . '/../model/travel.model.php';
 
-// Inicializar la conexión
+// Inicialitzar la connexió
 try {
     $conn = Database::getInstance()->getConnection();
     
+    // Comprovar si s'ha especificat una acció
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
     } else if (isset($_POST['action'])) {
         $action = $_POST['action'];
     } else {
-        throw new Exception('No se especificó ninguna acción');
+        throw new Exception('No s\'ha especificat cap acció');
     }
 
+    // Seleccionar l'acció a realitzar
     switch ($action) {
         case 'ajaxContinents':
             ajaxContinents($conn);
@@ -40,46 +40,50 @@ try {
             ajaxDeleteTravel($conn);
             break;
         default:
-            throw new Exception('Acción no válida: ' . $action);
+            throw new Exception('Acció no vàlida: ' . $action);
     }
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
 
+// Funció per obtenir els continents
 function ajaxContinents($conn)
 {
     try {
         $continents = getContinents($conn);
         if ($continents === false || isset($continents['error'])) {
-            echo json_encode(['error' => 'No se pudieron obtener los continentes']);
+            echo json_encode(['error' => 'No s\'han pogut obtenir els continents']);
             return;
         }
         echo json_encode($continents);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al obtener continentes: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en obtenir continents: ' . $e->getMessage()]);
     }
 }
 
+// Funció per obtenir els països d'un continent
 function ajaxCountries($conn, $continentId)
 {
     try {
         $countries = getCountries($conn, $continentId);
         echo json_encode($countries);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al obtener países: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en obtenir països: ' . $e->getMessage()]);
     }
 }
 
+// Funció per obtenir el preu d'un país
 function ajaxPrice($conn, $paisId)
 {
     try {
         $price = getPrice($conn, $paisId);
         echo json_encode($price);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al obtener el precio: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en obtenir el preu: ' . $e->getMessage()]);
     }
 }
 
+// Funció per inserir un viatge
 function ajaxInsertTravel($conn)
 {
     $travel = [
@@ -92,46 +96,48 @@ function ajaxInsertTravel($conn)
         'descompte' => isset($_POST['descompte']) ? $_POST['descompte'] : null
     ];
 
-    // Calcular el precio total: precio base del país * número de personas
+    // Calcular el preu total: preu base del país * nombre de persones
     $travel['preu'] = getCountryPrice($conn, $travel['pais_id']) * $travel['num_persones'];
 
-    // Aplicar descuento si corresponde
+    // Aplicar descompte si correspon
     if (isset($travel['descompte']) && $travel['descompte'] === 'on') {
-        $travel['preu'] *= 0.80; // Descuento del 20%
+        $travel['preu'] *= 0.80; // Descompte del 20%
     }
 
     try {
         if (insertTravel($conn, $travel)) {
-            // Enviar respuesta de éxito
-            echo json_encode(['success' => 'El viaje se ha insertado correctamente.']);
+            // Enviar resposta d'èxit
+            echo json_encode(['success' => 'El viatge s\'ha inserit correctament.']);
         } else {
-            // Enviar respuesta de error
-            echo json_encode(['error' => 'No se pudo insertar el viaje.']);
+            // Enviar resposta d'error
+            echo json_encode(['error' => 'No s\'ha pogut inserir el viatge.']);
         }
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al insertar el viaje: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en inserir el viatge: ' . $e->getMessage()]);
     }
 }
 
+// Funció per obtenir tots els viatges
 function ajaxGetAllTravels($conn)
 {
     try {
         $travels = getAllTravels($conn);
         echo json_encode($travels);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al obtener viajes: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en obtenir viatges: ' . $e->getMessage()]);
     }
 }
 
+// Funció per eliminar un viatge
 function ajaxDeleteTravel($conn) {
     try {
         $travelId = $_POST['travelId'];
         if (deleteTravel($conn, $travelId)) {
-            echo json_encode(['success' => 'Viaje eliminado correctamente']);
+            echo json_encode(['success' => 'Viatge eliminat correctament']);
         } else {
-            echo json_encode(['error' => 'No se pudo eliminar el viaje']);
+            echo json_encode(['error' => 'No s\'ha pogut eliminar el viatge']);
         }
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al eliminar el viaje: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error en eliminar el viatge: ' . $e->getMessage()]);
     }
 }

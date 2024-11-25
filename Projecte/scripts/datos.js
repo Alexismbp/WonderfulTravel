@@ -1,10 +1,15 @@
-// scripts/datos.js
+// Array d'objectes que conté les ofertes de viatges
 const ofertas = [
     {
+        // Nom de l'oferta
         nombre: 'Safari en Kenia',
+        // Preu de l'oferta
         precio: 1500.00,
+        // Ruta de la imatge de l'oferta
         imagen: 'images/kenia.jpg',
+        // Dates disponibles per a l'oferta
         fechas: ['2024-05-20', '2024-06-15'],
+        // Identificador del país
         pais_id: 1
     },
     {

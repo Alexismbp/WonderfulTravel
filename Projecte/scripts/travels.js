@@ -1,5 +1,9 @@
 import { imagenesPaises } from './imagenes-paises.js';
 
+/**
+ * Funció principal per carregar i mostrar tots els viatges
+ * Fa una petició AJAX per obtenir les dades i les mostra en el DOM
+ */
 export function loadTravels() {
     return fetch('controlador/ajax-handler.php?action=getAllTravels')
         .then(response => response.json())
@@ -7,9 +11,11 @@ export function loadTravels() {
             const container = document.getElementById('viajes-lista');
             container.innerHTML = '';
             
+            // Iterem sobre cada viatge i creem la seva targeta corresponent
             travels.forEach(travel => {
                 const viajeElement = document.createElement('div');
                 viajeElement.className = 'viaje-card';
+                // Creació de l'estructura HTML per cada viatge
                 viajeElement.innerHTML = `
                     <img src="${imagenesPaises[travel.pais_id]}" alt="Imagen de ${travel.nom_pais}">
                     <div class="viaje-info"><span>Fecha:</span> ${travel.data}</div>
@@ -22,7 +28,7 @@ export function loadTravels() {
                 `;
                 container.appendChild(viajeElement);
 
-                // Añadir evento click al botón de eliminar
+                // Configuració del botó d'eliminar per cada targeta
                 const deleteBtn = viajeElement.querySelector('.delete-btn');
                 deleteBtn.addEventListener('click', () => deleteTravel(travel.id));
             });
@@ -30,12 +36,20 @@ export function loadTravels() {
         .catch(error => console.error('Error:', error));
 }
 
+/**
+ * Funció per eliminar un viatge específic
+ * @param {number} travelId - ID del viatge a eliminar
+ * Mostra un diàleg de confirmació abans d'eliminar
+ * Fa una petició POST al servidor per realitzar l'eliminació
+ */
 function deleteTravel(travelId) {
     if (confirm('¿Estás seguro de que quieres eliminar este viaje?')) {
+        // Preparació de les dades pel servidor
         const formData = new FormData();
         formData.append('action', 'deleteTravel');
         formData.append('travelId', travelId);
 
+        // Petició AJAX per eliminar el viatge
         fetch('controlador/ajax-handler.php', {
             method: 'POST',
             body: formData
@@ -43,7 +57,7 @@ function deleteTravel(travelId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                loadTravels(); // Recargar la lista de viajes
+                loadTravels(); // Recarreguem la llista després d'eliminar
             } else {
                 alert('Error: ' + data.error);
             }

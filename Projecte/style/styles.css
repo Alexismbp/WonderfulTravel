@@ -1,8 +1,9 @@
+/* Estil per al cos de la pàgina */
 body {
     font-family: 'Arial', sans-serif;
-    background: url('../img/viajes.jpg') no-repeat center center fixed;
+    background: url('../img/viajes.jpg') no-repeat center center fixed; /* Imatge de fons */
     color: #333;
-    background-size: cover;
+    background-size: cover; /* Ajusta la mida de la imatge de fons */
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,21 +12,24 @@ body {
     justify-content: flex-start;
     min-height: 100vh;
     box-sizing: border-box;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px); /* Aplica un efecte de desenfocament al fons */
+    padding-bottom: 20px;
 }
 
+/* Estil per a l'encapçalament */
 header {
     width: 100%;
     background-color: #333;
     padding: 15px 0;
     margin-top: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Ombra per a l'encapçalament */
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1000; /* Assegura que l'encapçalament estigui per sobre d'altres elements */
 }
 
+/* Estil per a la navegació */
 nav ul {
     list-style-type: none;
     margin: 0;
@@ -43,46 +47,50 @@ nav ul li a {
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
-    transition: color 0.3s, transform 0.3s;
+    transition: color 0.3s, transform 0.3s; /* Transició per a l'efecte de passar el ratolí */
 }
 
 nav ul li a:hover {
     color: #ff7e5f;
-    transform: scale(1.1);
+    transform: scale(1.1); /* Efecte de zoom al passar el ratolí */
 }
 
+/* Estil per a la data i hora */
 #datetime {
     font-family: Arial, sans-serif;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     color: white;
-    background-color: rgba(0, 0, 255, 0.7);
+    background-color: rgba(0, 0, 255, 0.7); /* Fons blau amb opacitat */
     border-radius: 25px;
     width: 220px;
     padding: 12px;
     margin: 10px 0;
-    margin-top: 70px;
-    margin-bottom: 5px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 90px;
+    margin-bottom: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombra per a la data i hora */
 }
 
+/* Estil per al títol */
 h1.titulo {
     color: white;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin: 5px 0 15px 0;
 }
 
+/* Estil per al formulari */
 form {
-    margin-top: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.9); /* Fons blanc amb opacitat */
+    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra per al formulari */
     width: 500px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 8px;
 }
 
 form label {
@@ -97,12 +105,13 @@ form input[type="number"],
 form select,
 form input[type="checkbox"] {
     width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 8px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
+/* Estil per al botó del formulari */
 form button {
     grid-column: span 2;
     padding: 10px;
@@ -115,21 +124,24 @@ form button {
 }
 
 form button:hover {
-    background-color: #365899;
+    background-color: #365899; /* Canvia el color de fons al passar el ratolí */
 }
 
+/* Estil per als grups de formulari */
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 
 .form-group.full-width {
     grid-column: span 2;
 }
 
+/* Estil per a la imatge del país */
 #pais-imagen {
     grid-column: span 2;
-    height: 200px;
+    height: 150px;
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
@@ -139,15 +151,16 @@ form button:hover {
 }
 
 .imagen-pais {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out; /* Transició per a l'efecte de zoom */
     border-radius: 8px;
     overflow: hidden;
 }
 
 .imagen-pais:hover {
-    transform: scale(1.15);
+    transform: scale(1.15); /* Efecte de zoom al passar el ratolí */
 }
 
+/* Contenidor per a les targetes de viatges */
 .viajes-container {
     width: 90%;
     max-width: 1200px;
@@ -158,11 +171,12 @@ form button:hover {
     padding: 20px;
 }
 
+/* Estil per a les targetes de viatges */
 .viaje-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.9); /* Fons blanc amb opacitat */
     border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra per a les targetes */
 }
 
 .viaje-card img {
@@ -173,6 +187,7 @@ form button:hover {
     margin-bottom: 10px;
 }
 
+/* Informació de les targetes de viatges */
 .viaje-info {
     margin: 5px 0;
     font-size: 14px;
@@ -180,4 +195,86 @@ form button:hover {
 
 .viaje-info span {
     font-weight: bold;
+}
+
+#pais-imagen img {
+    max-height: 150px;
+}
+
+/* Estil per al rellotge */
+.clock {
+    width: 300px;  /* Aumentado de 200px */
+    height: 300px; /* Aumentado de 200px */
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fons blanc amb opacitat */
+    border: 2px solid #333;
+    position: relative;
+    margin: 20px auto;
+}
+
+/* Estil per als números del rellotge */
+.number {
+    --number-size: 30px;
+    position: absolute;
+    width: var(--number-size);
+    height: var(--number-size);
+    text-align: center;
+    font-size: 1.2rem;
+    transform-origin: center;
+    left: calc(50% - var(--number-size)/2);
+    top: calc(50% - var(--number-size)/2);
+    padding: 0;
+}
+
+/* Posicionament dels números del rellotge */
+.number1 { transform: rotate(30deg) translateY(-120px) rotate(-30deg); }
+.number2 { transform: rotate(60deg) translateY(-120px) rotate(-60deg); }
+.number3 { transform: rotate(90deg) translateY(-120px) rotate(-90deg); }
+.number4 { transform: rotate(120deg) translateY(-120px) rotate(-120deg); }
+.number5 { transform: rotate(150deg) translateY(-120px) rotate(-150deg); }
+.number6 { transform: rotate(180deg) translateY(-120px) rotate(-180deg); }
+.number7 { transform: rotate(210deg) translateY(-120px) rotate(-210deg); }
+.number8 { transform: rotate(240deg) translateY(-120px) rotate(-240deg); }
+.number9 { transform: rotate(270deg) translateY(-120px) rotate(-270deg); }
+.number10 { transform: rotate(300deg) translateY(-120px) rotate(-300deg); }
+.number11 { transform: rotate(330deg) translateY(-120px) rotate(-330deg); }
+.number12 { transform: rotate(0deg) translateY(-120px) rotate(0deg); }
+
+/* Estil per a les manetes del rellotge */
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background-color: #333;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.hour {
+    width: 4px;
+    height: 30%;
+}
+
+.minute {
+    width: 3px;
+    height: 35%;
+}
+
+.second {
+    width: 2px;
+    height: 40%;
+    background-color: red;
+}
+
+/* Punt central del rellotge */
+.center-point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
 }
