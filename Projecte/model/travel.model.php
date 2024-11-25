@@ -32,7 +32,11 @@ function getPrice($conn, $paisId) {
 
 // Función para insertar el viaje
 function insertTravel($conn, $travel) {
-
+    // Validar datos antes de insertar
+    $errors = validateTravel($travel);
+    if (!empty($errors)) {
+        throw new Exception(implode(", ", $errors));
+    }
 
     // Preparar la consulta SQL
     $sql = "INSERT INTO viatges (nom, telefon, num_persones, data, preu, pais_id) 
@@ -49,6 +53,34 @@ function insertTravel($conn, $travel) {
     // Ejecutar la consulta
     return $stmt->execute();
     
+}
+
+function validateTravel($travel) {
+    $errors = [];
+    
+    // Validar nombre
+    if (!preg_match('/^[A-Za-zÀ-ÿ\s]{2,50}$/', $travel['nom'])) {
+        $errors[] = "El nombre no es válido";
+    }
+    
+    // Validar teléfono - Acepta formatos internacionales
+    if (!preg_match('/^\+?[1-9]\d{7,14}$/', $travel['telefon'])) {
+        $errors[] = "El número de teléfono no es válido";
+    }
+    
+    // Validar fecha
+    $fecha = new DateTime($travel['data']);
+    $hoy = new DateTime('today');
+    if ($fecha < $hoy) {
+        $errors[] = "La fecha no puede ser anterior a hoy";
+    }
+    
+    // Validar número de personas
+    if (!is_numeric($travel['num_persones']) || $travel['num_persones'] < 1 || $travel['num_persones'] > 50) {
+        $errors[] = "El número de personas debe estar entre 1 y 50";
+    }
+    
+    return $errors;
 }
 
 function getCountries($conn, $continentId) {
