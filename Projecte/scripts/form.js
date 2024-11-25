@@ -91,7 +91,7 @@ function validateForm(form) {
     }
 
     // Validar telèfon
-    if (!/^\+?[1-9]\d{7,14}$/.test(telefono)) {
+    if (!/^\+?[0-9]{8,15}$/.test(telefono)) {
         alert('Introdueix un número de telèfon vàlid');
         return false;
     }

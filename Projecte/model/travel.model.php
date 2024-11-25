@@ -66,7 +66,7 @@ function validateTravel($travel) {
     }
     
     // Validar telèfon - Accepta formats internacionals
-    if (!preg_match('/^\+?[1-9]\d{7,14}$/', $travel['telefon'])) {
+    if (!preg_match('/^\+?[0-9]{8,15}$/', $travel['telefon'])) {
         $errors[] = "El número de telèfon no és vàlid"; // Afegir error si el telèfon no és vàlid
     }
     
