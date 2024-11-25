@@ -95,14 +95,18 @@ function getCountries($conn, $continentId) {
 }
 
 // Funció per obtenir tots els viatges
-function getAllTravels($conn) {
+function getAllTravels($conn, $orderBy = 'data') {
+    $orderDirection = ($orderBy === 'desti') ? 'ASC' : 'ASC'; // ASC per a ambdós casos
+    $orderColumn = ($orderBy === 'desti') ? 'p.nom_pais' : 'v.data';
+    
     $sql = "SELECT v.*, p.nom_pais 
             FROM viatges v 
             JOIN paisos p ON v.pais_id = p.id 
-            ORDER BY v.data DESC"; // Consulta SQL per obtenir tots els viatges
-    $stmt = $conn->prepare($sql); // Preparar la consulta
-    $stmt->execute(); // Executar la consulta
-    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retornar els resultats com a array associatiu
+            ORDER BY " . $orderColumn . " " . $orderDirection;
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // Funció per eliminar un viatge

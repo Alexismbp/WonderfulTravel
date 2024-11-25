@@ -7,7 +7,11 @@ require_once __DIR__ . '/../model/travel.model.php';
 // Inicialitzar la connexió
 try {
     $conn = Database::getInstance()->getConnection();
-    
+    // DEBUGGING
+    // action=getAllTravels&orderBy=desti
+  /*   $_GET['action'] = "getAllTravels";
+    $_GET['orderBy'] = "data"; */
+
     // Comprovar si s'ha especificat una acció
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
@@ -34,7 +38,8 @@ try {
             ajaxInsertTravel($conn);
             break;
         case 'getAllTravels':
-            ajaxGetAllTravels($conn);
+            $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'data';
+            ajaxGetAllTravels($conn, $orderBy);
             break;
         case 'deleteTravel':
             ajaxDeleteTravel($conn);
@@ -118,10 +123,10 @@ function ajaxInsertTravel($conn)
 }
 
 // Funció per obtenir tots els viatges
-function ajaxGetAllTravels($conn)
+function ajaxGetAllTravels($conn, $orderBy)
 {
     try {
-        $travels = getAllTravels($conn);
+        $travels = getAllTravels($conn, $orderBy);
         echo json_encode($travels);
     } catch (PDOException $e) {
         echo json_encode(['error' => 'Error en obtenir viatges: ' . $e->getMessage()]);

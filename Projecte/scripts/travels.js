@@ -1,5 +1,18 @@
 import { imagenesPaises } from './imagenes-paises.js';
 
+// Función para obtener el valor de una cookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return 'data'; // valor por defecto
+}
+
+// Función para establecer una cookie
+function setCookie(name, value) {
+    document.cookie = `${name}=${value};path=/;max-age=31536000`; // expira en 1 año
+}
+
 /**
  * Funció principal per carregar i mostrar tots els viatges
  * Fa una petició AJAX per obtenir les dades i les mostra en el DOM
@@ -7,9 +20,14 @@ import { imagenesPaises } from './imagenes-paises.js';
 export function loadTravels(retryCount = 3) {
     return new Promise((resolve, reject) => {
         const attemptFetch = (attempts) => {
-            fetch('controlador/ajax-handler.php?action=getAllTravels')
+            const orderBy = getCookie('orderCriteria') || 'data';
+            fetch(`controlador/ajax-handler.php?action=getAllTravels&orderBy=${orderBy}`)
                 .then(response => response.json())
                 .then(travels => {
+                    if (travels.error) {
+                        throw new Error(travels.error);
+                    }
+                    
                     const container = document.getElementById('viajes-lista');
                     container.innerHTML = '';
                     
@@ -46,6 +64,30 @@ export function loadTravels(retryCount = 3) {
         attemptFetch(retryCount);
     });
 }
+
+// Mover la inicialización del select fuera de DOMContentLoaded
+export function initializeOrderSelect() {
+    const orderSelect = document.getElementById('ordenar');
+    if (!orderSelect) return; // Validación para asegurar que el elemento existe
+
+    const savedOrder = getCookie('orderCriteria');
+    if (savedOrder) {
+        orderSelect.value = savedOrder;
+    }
+
+    orderSelect.addEventListener('change', (e) => {
+        setCookie('orderCriteria', e.target.value);
+        loadTravels(); // Recargar los viajes con el nuevo orden
+    });
+
+    // Cargar los viajes inicialmente
+    loadTravels();
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initializeOrderSelect();
+});
 
 /**
  * Funció per eliminar un viatge específic

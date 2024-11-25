@@ -4,7 +4,7 @@ import './rellotge.js';
 import { getContinents } from './desti.js';
 import './desti.js';
 import { initializeForm } from './form.js';
-import { loadTravels } from './travels.js';
+import { loadTravels, initializeOrderSelect } from './travels.js';
 import { initAnalogClock } from './analogClock.js';
 
 // Funció per mostrar les ofertes disponibles a la consola
@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Inicialització del formulari
         await initializeForm();
+        
+        // Inicialització de l'ordre de selecció
+        initializeOrderSelect();
         
     } catch (error) {
         console.error('Error crític:', error);

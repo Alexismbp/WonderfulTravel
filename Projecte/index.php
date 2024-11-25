@@ -51,16 +51,16 @@
         <div class="form-group">
             <label for="nom">Nombre</label>
             <!-- Camp per introduir el nom -->
-            <input type="text" id="nom" name="nom" pattern="^[A-Za-zÀ-ÿ\s]{2,50}$" 
-                   title="El nombre debe contener solo letras y espacios, entre 2 y 50 caracteres" required>
+            <input type="text" id="nom" name="nom" pattern="^[A-Za-zÀ-ÿ\s]{2,50}$"
+                title="El nombre debe contener solo letras y espacios, entre 2 y 50 caracteres" required>
         </div>
 
         <div class="form-group">
             <label for="telefon">Número de Teléfono</label>
             <!-- Camp per introduir el número de telèfon -->
-            <input type="tel" id="telefon" name="telefon" 
-                   pattern="^\+?[1-9]\d{7,14}$"
-                   title="Introduce un número de teléfono válido (entre 8 y 15 dígitos, puede incluir + al inicio)" required>
+            <input type="tel" id="telefon" name="telefon"
+                pattern="^\+?[1-9]\d{7,14}$"
+                title="Introduce un número de teléfono válido (entre 8 y 15 dígitos, puede incluir + al inicio)" required>
         </div>
 
         <div class="form-group full-width">
@@ -111,6 +111,15 @@
         <!-- Botó per afegir el viatge -->
         <button type="submit" name="action" value="ajaxInsertTravel">Afegueix</button>
     </form>
+
+    <!-- Select per ordenar els viatges -->
+    <div class="form-group full-width">
+        <label for="ordenar">Ordenar viatges per:</label>
+        <select id="ordenar" name="ordenar">
+            <option value="data">Data</option>
+            <option value="desti">Destí</option>
+        </select>
+    </div>
 
     <!-- Div per mostrar la llista de viatges -->
     <div id="viajes-lista" class="viajes-container"></div>
