@@ -1,0 +1,53 @@
+
+/* Estilos específicos para impresión */
+@media print {
+    /* Ocultar elementos no necesarios para impresión */
+    .no-print {
+        display: none !important;
+    }
+
+    /* Mostrar elementos solo para impresión */
+    .print-only {
+        display: block !important;
+    }
+
+    /* Ajustes generales de página */
+    body {
+        font-size: 12pt;
+        line-height: 1.3;
+        background: #fff;
+        color: #000;
+    }
+
+    /* Formato específico para las tarjetas de viaje en impresión */
+    .viaje-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #000;
+        margin: 0 0 20px 0;
+        padding: 15px;
+        background: none;
+        box-shadow: none;
+    }
+
+    /* Ajustes de imágenes para impresión */
+    .viaje-card img {
+        max-width: 200px;
+        height: auto;
+    }
+
+    /* Información adicional de impresión */
+    .print-info {
+        margin-top: 20px;
+        font-size: 10pt;
+        text-align: center;
+        border-top: 1px solid #000;
+        padding-top: 10px;
+    }
+
+    /* Estilos para el número de referencia */
+    .reference-number {
+        font-weight: bold;
+        color: #000;
+    }
+}

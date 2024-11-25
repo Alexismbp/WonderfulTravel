@@ -39,15 +39,24 @@ WonderfulTravel es una aplicación web diseñada para gestionar y visualizar via
 - **view-travels.html**: Página para ver la lista de viajes añadidos.
 - **scripts/**: Directorio que contiene los scripts JavaScript para la funcionalidad de la aplicación.
     - **main.js**: Script principal que inicializa la aplicación.
-    - **form.js**: Script para manejar la lógica del formulario y las solicitudes AJAX al servidor.
+    - **form/**: Directorio que contiene los scripts relacionados con el formulario.
+        - **setupDatePicker.js**: Script para configurar el DatePicker.
+        - **setupPriceCalculator.js**: Script para configurar el cálculo del precio.
+        - **createPriceTotalInput.js**: Script para crear el input del precio total.
+        - **setupFormSubmission.js**: Script para configurar el envío del formulario.
+        - **validateForm.js**: Script para validar el formulario.
+        - **validationRules.js**: Script que contiene las reglas de validación.
     - **travels.js**: Script para cargar y eliminar viajes utilizando AJAX.
     - **analogClock.js**: Script para el reloj analógico.
     - **rellotge.js**: Script para el reloj digital.
+    - **updateUI.js**: Script para actualizar la interfaz de usuario.
     - **datos.js**: Datos de ejemplo para los viajes.
     - **ofertas.js**: Datos de ejemplo para las ofertas.
 - **style/**: Directorio que contiene los estilos CSS para la aplicación.
     - **styles.css**: Archivo principal de estilos.
+    - **print-styles.css**: Estilos para impresión.
 - **img/**: Directorio que contiene las imágenes utilizadas en la aplicación.
+    - **paises/**: Contiene las imágenes de los países y un `README.md`.
 - **controlador/**: Directorio que contiene los scripts PHP que manejan las solicitudes AJAX.
     - **ajax-handler.php**: Archivo que procesa las solicitudes AJAX del cliente.
 
