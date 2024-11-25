@@ -22,9 +22,7 @@
 
 <body>
 
-    <!-- Div per mostrar la data i hora actual -->
-    <div id="datetime"></div>
-    <!-- Rellotge analògic -->
+    <!-- Solo mantener el reloj analógico -->
     <div class="clock">
         <div class="hand hour"></div>
         <div class="hand minute"></div>
@@ -63,10 +61,20 @@
                 title="Introduce un número de teléfono válido (entre 8 y 15 dígitos, puede incluir + al inicio)" required>
         </div>
 
-        <div class="form-group full-width">
+        <div class="form-group full-width date-container">
             <label for="data-viatge">Fecha del viaje</label>
             <!-- Camp per introduir la data del viatge -->
-            <input type="date" name="data-viatge" id="data-viatge" required>
+            <div class="date-input-container">
+                <input type="date" name="data-viatge" id="data-viatge" readonly required>
+                <button type="button" class="calendar-button" id="calendar-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <div class="form-group">
@@ -91,7 +99,7 @@
         </div>
 
         <div class="form-group">
-            <label for="preu">Precio</label>
+            <label for="preu">Precio Por Persona</label>
             <!-- Camp per mostrar el preu (només lectura) -->
             <input type="text" id="preu" name="preu" readonly>
         </div>

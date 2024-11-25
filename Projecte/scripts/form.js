@@ -4,8 +4,31 @@ export function initializeForm() {
     // Configurar la data mínima com avui i la data per defecte
     const today = new Date().toISOString().split('T')[0];
     const dataViatgeInput = document.getElementById('data-viatge');
+    const calendarButton = document.getElementById('calendar-trigger');
+    
     dataViatgeInput.value = today;
     dataViatgeInput.min = today;
+    
+    // Añadir manejador para el botón del calendario
+    calendarButton.addEventListener('click', () => {
+        // Temporalmente quitar el readonly para permitir que aparezca el date picker
+        dataViatgeInput.removeAttribute('readonly');
+        dataViatgeInput.showPicker();
+        // Volver a poner readonly después de un pequeño delay
+        setTimeout(() => {
+            dataViatgeInput.setAttribute('readonly', '');
+        }, 100);
+    });
+    
+    // Asegurarse de que el campo esté readonly después de seleccionar una fecha
+    dataViatgeInput.addEventListener('change', () => {
+        dataViatgeInput.setAttribute('readonly', '');
+    });
+
+    // Prevenir entrada directa de teclado
+    dataViatgeInput.addEventListener('keydown', (e) => {
+        e.preventDefault();
+    });
 
     // Actualitzar el preu total quan canviï el número de persones
     const numPersonesInput = document.getElementById('num-persones');

@@ -37,6 +37,9 @@ class Database {
                 $this->config['DB_PASSWORD']
             );
             
+            // Añade esta línea al principio de la conexión PDO
+            $this->conn->setAttribute(PDO::ATTR_PERSISTENT, true);
+
             // Configuració dels atributs de PDO per a una millor gestió d'errors i rendiment
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Llança excepcions en cas d'error
             $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Desactiva l'emulació de sentències preparades

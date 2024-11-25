@@ -55,23 +55,6 @@ nav ul li a:hover {
     transform: scale(1.1); /* Efecte de zoom al passar el ratolí */
 }
 
-/* Estil per a la data i hora */
-#datetime {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    background-color: rgba(0, 0, 255, 0.7); /* Fons blau amb opacitat */
-    border-radius: 25px;
-    width: 220px;
-    padding: 12px;
-    margin: 10px 0;
-    margin-top: 90px;
-    margin-bottom: 0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombra per a la data i hora */
-}
-
 /* Estil per al títol */
 h1.titulo {
     color: white;
@@ -209,7 +192,7 @@ form button:hover {
     background-color: rgba(255, 255, 255, 0.8); /* Fons blanc amb opacitat */
     border: 2px solid #333;
     position: relative;
-    margin: 20px auto;
+    margin: 80px auto 20px auto; /* Ajustado el margen superior a 80px */
 }
 
 /* Estil per als números del rellotge */
@@ -245,10 +228,11 @@ form button:hover {
     position: absolute;
     bottom: 50%;
     left: 50%;
-    transform-origin: bottom;
+    transform-origin: 50% 100%;
     background-color: #333;
     border-radius: 10px;
     z-index: 10;
+    transition: transform 0.5s cubic-bezier(0.4, 2.1, 0.3, 1);
 }
 
 .hour {
@@ -277,4 +261,71 @@ form button:hover {
     height: 10px;
     background-color: #333;
     border-radius: 50%;
+}
+
+/* Estilos para el contenedor de fecha */
+.date-container {
+    position: relative;
+}
+
+.date-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 80%;
+}
+
+.date-input-container input[type="date"] {
+    flex: 1;
+    width: auto;
+    margin-bottom: 0;
+}
+
+.calendar-button {
+    background: #4267B2;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-button:hover {
+    background: #365899;
+}
+
+.calendar-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+}
+
+/* Ocultar el botón nativo del input date en diferentes navegadores */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Modificar los estilos del input date */
+input[type="date"]:read-only {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Permitir que el date picker nativo sea visible cuando se active */
+input[type="date"]:in-range::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }

@@ -4,7 +4,13 @@ import { imagenesPaises } from './imagenes-paises.js';
 export function getContinents(retryCount = 3) {
     return new Promise((resolve, reject) => {
         const attemptFetch = (attempts) => {
-            fetch('controlador/ajax-handler.php?action=ajaxContinents')
+            fetch('controlador/ajax-handler.php?action=ajaxContinents', {
+                // Añadir cache para reducir conexiones
+                cache: 'force-cache',
+                headers: {
+                    'Cache-Control': 'max-age=3600'
+                }
+            })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error en la resposta del servidor');
@@ -17,18 +23,22 @@ export function getContinents(retryCount = 3) {
                     }
                     // Afegir opcions de continents al select
                     const continentSelect = document.querySelector('select[name="continent"]');
-                    data.forEach(continent => {
-                        const option = document.createElement('option');
-                        option.value = continent.id;
-                        option.textContent = continent.nom_continent;
-                        continentSelect.appendChild(option);
-                    });
+                    if (continentSelect) {
+                        continentSelect.innerHTML = '<option value="">-- Selecciona el continente --</option>';
+                        data.forEach(continent => {
+                            const option = document.createElement('option');
+                            option.value = continent.id;
+                            option.textContent = continent.nom_continent;
+                            continentSelect.appendChild(option);
+                        });
+                    }
                     resolve(true);
                 })
                 .catch(error => {
                     console.error(`Intent ${attempts}: Error al carregar continents:`, error);
                     if (attempts > 1) {
-                        setTimeout(() => attemptFetch(attempts - 1), 1000);
+                        // Aumentar el tiempo entre reintentos
+                        setTimeout(() => attemptFetch(attempts - 1), attempts * 2000);
                     } else {
                         reject(error);
                     }

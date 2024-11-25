@@ -7,21 +7,19 @@ export function initAnalogClock() {
 
     // Funció per actualitzar el rellotge
     function updateClock() {
-        // Obtenir l'hora de Madrid
         const now = new Date();
-        const madridTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
         
-        // Obtenir els segons, minuts i hores de l'hora de Madrid
-        const seconds = madridTime.getSeconds();
-        const minutes = madridTime.getMinutes();
-        const hours = madridTime.getHours();
+        // Calcular los grados para cada manecilla
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60) * 360);
+        
+        const minutes = now.getMinutes();
+        const minutesDegrees = ((minutes / 60) * 360) + ((seconds/60)*6);
+        
+        const hours = now.getHours();
+        const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30);
 
-        // Calcular els graus de rotació per les agulles del rellotge
-        const secondsDegrees = (seconds / 60) * 360;
-        const minutesDegrees = ((minutes + seconds/60) / 60) * 360;
-        const hoursDegrees = ((hours + minutes/60) / 12) * 360;
-
-        // Aplicar la rotació a les agulles del rellotge
+        // Aplicar las rotaciones
         secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
         minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;

@@ -7,11 +7,6 @@ require_once __DIR__ . '/../model/travel.model.php';
 // Inicialitzar la connexió
 try {
     $conn = Database::getInstance()->getConnection();
-    // DEBUGGING
-    // action=getAllTravels&orderBy=desti
-  /*   $_GET['action'] = "getAllTravels";
-    $_GET['orderBy'] = "data"; */
-
     // Comprovar si s'ha especificat una acció
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
@@ -49,6 +44,9 @@ try {
     }
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
+} finally {
+    // Cerrar la conexión
+    $conn = null;
 }
 
 // Funció per obtenir els continents

@@ -1,6 +1,5 @@
 // Importació dels mòduls necessaris per l'aplicació
 import { ofertas } from './ofertas.js';
-import './rellotge.js';
 import { getContinents } from './desti.js';
 import './desti.js';
 import { initializeForm } from './form.js';
