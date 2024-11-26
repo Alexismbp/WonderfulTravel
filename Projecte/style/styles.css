@@ -1,7 +1,7 @@
 /* Estil per al cos de la pàgina */
 body {
     font-family: 'Arial', sans-serif;
-    background: url('../img/viajes.jpg') no-repeat center center fixed; /* Imatge de fons */
+    background: url('../img/viajes.webp') no-repeat center center fixed; /* Imatge de fons */
     color: #333;
     background-size: cover; /* Ajusta la mida de la imatge de fons */
     margin: 0;
