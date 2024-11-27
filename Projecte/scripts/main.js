@@ -5,6 +5,7 @@ import './desti.js';
 import { initializeForm } from './form.js';
 import { loadTravels, initializeOrderSelect } from './travels.js';
 import { initAnalogClock } from './analogClock.js';
+import { initializeImageModal } from './utils/imageModal.js';
 
 // Funció per mostrar les ofertes disponibles a la consola
 function mostrarOfertas() {
@@ -36,6 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Inicialització de l'ordre de selecció
         initializeOrderSelect();
+        
+        // Inicializar el modal de imágenes
+        initializeImageModal();
         
     } catch (error) {
         console.error('Error crític:', error);

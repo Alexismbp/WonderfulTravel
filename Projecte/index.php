@@ -12,8 +12,6 @@
 </head>
 
 <body>
-    <!-- Incluir el encabezado desde un archivo separado -->
-    <?php include 'partials/header.php'; ?>
 
     <!-- Incluir el reloj desde un archivo separado -->
     <?php include 'partials/clock.php'; ?>
