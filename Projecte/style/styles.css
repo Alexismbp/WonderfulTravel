@@ -494,6 +494,62 @@ input[type="date"]:in-range::-webkit-calendar-picker-indicator {
     height: 16px;
 }
 
+.site-footer {
+    background-color: rgba(44, 62, 80, 0.95);
+    color: var(--text-light);
+    padding: 2rem 0;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.authors {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.authors span {
+    margin: 0 1rem;
+}
+
+.production-site {
+    text-align: right;
+}
+
+.site-footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.site-footer a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.authors {
+    margin-top: 1rem;
+}
+
+.authors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.authors li {
+    margin: 0.5rem 0;
+}
+
 @keyframes zoomIn {
     from {
         transform: scale(0.3);
