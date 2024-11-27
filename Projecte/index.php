@@ -8,6 +8,10 @@
     <title>Wonderful Travels</title>
     <link rel="stylesheet" href="style/styles.css">
     <link rel="icon" type="image/x-icon" href="http://wondertrav.marcoslopez.cat/favicon.ico" />
+    <!-- Cargar jsPDF antes de los módulos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <!-- Asegurarse que los módulos se cargan después -->
     <script type="module" src="scripts/main.js" defer></script>
 </head>
 
