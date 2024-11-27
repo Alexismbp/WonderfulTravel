@@ -71,5 +71,5 @@
     </div>
 
     <!-- Botó per afegir el viatge -->
-    <button type="submit" name="action" value="ajaxInsertTravel">Afegueix</button>
+    <button type="submit" name="action" value="ajaxInsertTravel">Confirmar</button>
 </form>

@@ -27,10 +27,10 @@
 
     <!-- Select per ordenar els viatges -->
     <div class="form-group full-width">
-        <label for="ordenar">Ordenar viatges per:</label>
+        <label for="ordenar">Ordenar viajes por:</label>
         <select id="ordenar" name="ordenar">
-            <option value="data">Data</option>
-            <option value="desti">Destí</option>
+            <option value="data">Fecha</option>
+            <option value="desti">Destino</option>
         </select>
     </div>
 
