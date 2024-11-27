@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: proxysql-01.dd.scip.local
--- Tiempo de generación: 24-11-2024 a las 20:46:03
+-- Tiempo de generación: 27-11-2024 a las 18:21:47
 -- Versión del servidor: 10.10.2-MariaDB-1:10.10.2+maria~deb11
 -- Versión de PHP: 8.2.12
 
@@ -91,12 +91,23 @@ INSERT INTO `paisos` (`id`, `nom_pais`, `preu`, `continent_id`) VALUES
 CREATE TABLE `viatges` (
   `id` int(11) NOT NULL,
   `nom` varchar(60) NOT NULL,
-  `telefon` int(14) NOT NULL,
+  `telefon` varchar(15) NOT NULL,
   `num_persones` int(2) NOT NULL,
   `data` date NOT NULL,
   `preu` int(11) NOT NULL,
   `pais_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `viatges`
+--
+
+INSERT INTO `viatges` (`id`, `nom`, `telefon`, `num_persones`, `data`, `preu`, `pais_id`) VALUES
+(17, 'Alexis', '711111111', 6, '2024-11-25', 6000, 1),
+(18, 'Marcos', '677654531', 6, '2024-11-29', 5280, 2),
+(19, 'Alexis', '711111111', 5, '2024-11-25', 10000, 4),
+(21, 'Maria', '711111111', 2, '2024-11-28', 2400, 7),
+(22, 'Jonathan', '611111111', 5, '2024-11-27', 6800, 9);
 
 --
 -- Índices para tablas volcadas
@@ -136,7 +147,7 @@ ALTER TABLE `continents`
 -- AUTO_INCREMENT de la tabla `viatges`
 --
 ALTER TABLE `viatges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
